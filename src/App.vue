@@ -1,3 +1,3 @@
 <template>
-  <p>Hello world</p>
+  <router-view></router-view>
 </template>
