@@ -6,7 +6,7 @@ import usePokemonList from '@/composables/usePokemonList'
 const route = useRoute()
 const router = useRouter()
 const searchQueryText = route.query.s
-
+const BASE_IMAGE_URL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon'
 const searchText = ref(searchQueryText)
 const { data, isLoading } = usePokemonList()
 
@@ -40,19 +40,24 @@ const filteredPokemon = computed(() => {
       <section v-if="filteredPokemon">
         <div
           v-if="filteredPokemon?.length > 0"
-          class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-2"
+          class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4"
         >
-          <div
-            v-for="pokemon in filteredPokemon"
+          <router-link
+            v-for="(pokemon, index) in filteredPokemon"
             :key="pokemon.name"
-            class="p-3 border-2 border-slate-100 rounded"
+            :to="{ name: 'pokemon-details', params: { name: pokemon.name } }"
+            class="p-3 block border-2 border-slate-100 rounded hover:shadow-md transition-all"
           >
-            <router-link
-              :to="{ name: 'pokemon-details', params: { name: pokemon.name } }"
-              class="text-lg text-blue-600 hover:text-blue-700"
-              >{{ pokemon.name }}</router-link
-            >
-          </div>
+            <div class="w-24 h-24 lg:w-40 lg:h-40 mx-auto">
+              <img
+                :src="`${BASE_IMAGE_URL}/${index + 1}.png`"
+                :alt="pokemon.name"
+                loading="lazy"
+                class="w-full h-full"
+              />
+            </div>
+            <p class="text-lg text-blue-600 text-center capitalize">{{ pokemon.name }}</p>
+          </router-link>
         </div>
         <div v-else>
           <h4 class="text-3xl font-semibold">No Pokemon found</h4>
