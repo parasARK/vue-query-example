@@ -12,9 +12,12 @@ const { data, isLoading } = usePokemonList()
       <p v-if="isLoading" class="text-2xl text-slate-600">Loading...</p>
 
       <div v-if="data">
-        <div v-for="pokemon in data.results" :key="pokemon.name">
-          <p>{{ pokemon.name }}</p>
-          <img src="" alt="" />
+        <div v-for="(pokemon, index) in data.results" :key="pokemon.name">
+          <router-link
+            :to="{ name: 'pokemon-details', params: { name: pokemon.name } }"
+            class="text-blue-600 hover:text-blue-700 underline"
+            >{{ pokemon.name }}</router-link
+          >
         </div>
       </div>
     </div>

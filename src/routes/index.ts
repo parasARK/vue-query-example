@@ -7,18 +7,18 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('@/views/Home.vue'),
   },
   {
-    path: '/pokemon/:id',
+    path: '/pokemon/:name',
     name: 'pokemon-details',
     component: () => import('@/views/PokemonDetails.vue'),
   },
   {
-    path: '/:catchAll(.*)',
+    path: '/:catchAll(.*)*',
     name: '404',
     component: () => import('@/views/404.vue'),
   },
   {
     path: '/error-404',
-    name: 'error-404',
+    name: 'not-found',
     redirect: { name: '404' },
   },
 ]

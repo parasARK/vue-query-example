@@ -1,13 +1,8 @@
 import { useQuery } from 'vue-query'
-import axios from 'axios'
+import PokeAPI from 'pokeapi-typescript'
 
-type PokemonId = string | string[] | undefined
-
-const fetchPokemon = (pokemonId: PokemonId) =>
-  axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
-
-function usePokemonList(pokemonId: PokemonId) {
-  return useQuery(['pokemon', pokemonId], () => fetchPokemon(pokemonId))
+function usePokemon(pokemonName: string) {
+  return useQuery(['pokemon', pokemonName], () => PokeAPI.Pokemon.fetch(pokemonName))
 }
 
-export default usePokemonList
+export default usePokemon
