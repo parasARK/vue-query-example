@@ -30,14 +30,15 @@ export default defineComponent({
 <template>
   <section class="py-8">
     <div class="container mx-auto px-4">
-      <h1 class="text-3xl font-bold mb-4">Pokemon details</h1>
-      <router-link :to="{ name: 'home' }" class="text-blue-400 underline">Home</router-link>
+      <router-link :to="{ name: 'home' }" class="text-blue-400 underline mb-4 inline-block">
+        &larr; Home</router-link
+      >
 
       <h3 v-if="isLoading">Loading...</h3>
       <div v-if="pokemon">
-        <h2>{{ pokemon.name }}</h2>
+        <h2 class="text-3xl font-bold mb-4 capitalize">{{ pokemon.name }}</h2>
 
-        <img :src="pokemon.sprites.back_default" :alt="pokemon.name" class="w-48 h-48" />
+        <img :src="pokemon.sprites.front_default" :alt="pokemon.name" class="w-48 h-48" />
       </div>
     </div>
   </section>
