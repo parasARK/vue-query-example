@@ -3,6 +3,13 @@ trigger:
  
 pool:
     vmImage: ubuntu-latest
+
+resources:
+  repositories:
+    - repository: vue-query-example
+      type: git
+      name: parasARK/vue-query-example
+      ref: main
  
 steps:
     - task: NodeTool@0
