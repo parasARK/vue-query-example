@@ -1,0 +1,29 @@
+trigger:
+    - main
+ 
+pool:
+    vmImage: ubuntu-latest
+ 
+steps:
+    - task: NodeTool@0
+      inputs:
+          versionSpec: '10.x'
+      displayName: 'Installaing Node.js'
+
+    # Installaing Packages
+    - script: |
+          yarn install
+      displayName: 'Installaing Packages'
+
+    # Building packages
+    - script: |
+          yarn build
+      displayName: 'Building packages'
+
+    # Publishing the build pipeline artifact (optional)
+    # This honors the .artifactignore file
+    - task: PublishPipelineArtifact@1
+      inputs:
+          targetPath: $(System.DefaultWorkingDirectory)/dist
+          artifactName: doctor-diary-app-distribution
+          
